@@ -55,13 +55,11 @@ def image_padding(image,w,h,extend=10):
     if w>h:
         diff = w-h
         half_diff = int(round(diff/2))
-        print(type(half_diff))
         padded_image = cv2.copyMakeBorder(image, half_diff+extend, half_diff+extend, extend, extend, cv2.BORDER_CONSTANT, value=[0, 0, 0])
         return padded_image
     elif h>w:
         diff = h-w
         half_diff = int(round(diff/2))
-        print(type(half_diff))
         padded_image = cv2.copyMakeBorder(image, extend, extend, half_diff+extend, half_diff+extend, cv2.BORDER_CONSTANT, value=[0, 0, 0])
         return padded_image
     

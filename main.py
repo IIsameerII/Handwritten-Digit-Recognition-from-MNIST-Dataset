@@ -4,6 +4,7 @@ from streamlit_drawable_canvas import st_canvas
 import torch
 from torchvision import transforms
 
+import pandas as pd
 import numpy as np
 from PIL import Image
 import cv2
@@ -16,19 +17,21 @@ st.title("Digit Detector using MNIST Dataset")
 # Input the model path here
 model = model.initialize_model('model\MNIST_Digit_Detector.pt')
 
-st.header("Drawable Canvas")
-st.markdown("""
-Draw on the canvas, get the digits predicted!
+st.success("""
+Draw on the canvas, get the digits predicted with the confidence scores!
 """)
 
 # Specify brush parameters and drawing mode
-b_width = st.slider("Brush width: ", 1, 100, 10)
+b_width = st.slider("Brush width: ", 1, 10, 10)
 
+
+st.header("Drawable Canvas")
 
 # Create a canvas component
 image_data = st_canvas(stroke_width=b_width,
                        stroke_color='#000000',
-                       background_color='#FFFFFF'
+                       background_color='#FFFFFF',
+                       width=700
                        )
 
 # Take the image data attribute and store it in the same variable.
@@ -72,7 +75,24 @@ if image_data is not None:
             digit = str(torch.argmax(y_pred_prob).item())
 
         invert = ip.invert_colors_opencv(pil_image)
-        st.image(invert,caption=f'Prediction: {digit}  |  Confidence: {conf:.2f}')
+
+        with st.container():
+            col1,col2 = st.columns(2)
+
+            with col1:
+                st.image(invert,caption=f'Prediction: {digit}  |  Confidence: {conf:.2f}')
+
+            with col2:
+                y_pred_prob_numpy = y_pred_prob.squeeze().to('cpu').numpy()
+
+                chart_data = pd.DataFrame(
+                    y_pred_prob_numpy,
+                    [0,1,2,3,4,5,6,7,8,9]                
+                )
+
+                chart_data.columns = ['Confidence']
+
+                st.bar_chart(chart_data)
 
         
         
