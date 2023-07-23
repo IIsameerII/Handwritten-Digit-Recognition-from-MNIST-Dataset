@@ -10,6 +10,9 @@ from PIL import Image
 import model
 import image_preprocessor as ip
 
+# Set the Streamlit page configration and Title
+st.set_page_config(page_title=r"Digit Detector",
+                   page_icon=r'streamlit_icon.png')
 st.title("Digit Detector using MNIST Dataset")
 
 # Run in GPU if available
@@ -19,7 +22,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 model = model.initialize_model(r'model/MNIST_Digit_Detector.pt')
 
 st.success("""
-Draw on the canvas, get the digits predicted with the confidence scores!
+Draw on the canvas and get your digits predicted with confidence scores!
 """)
 
 st.header("Drawable Canvas")
@@ -40,6 +43,7 @@ image_data = image_data.image_data
 # Do something interesting with the image data
 if image_data is not None:
 
+    # Extract a list of digits
     digit_lis= ip.extract_digits(image_data)
 
     
@@ -75,14 +79,20 @@ if image_data is not None:
                 conf = torch.max(y_pred_prob).item()*100
                 digit = str(torch.argmax(y_pred_prob).item())
 
+            # Invert the Colours for proper display
             invert = ip.invert_colors_opencv(pil_image)
 
+            # A Streamlit Container Widget
             with st.container():
+
+                # 2 Coloums
                 col1,col2 = st.columns(2)
 
+                # The first coloum will show the image and the highest predicted value
                 with col1:
                     st.image(invert,caption=f'Prediction: {digit}  |  Confidence: {conf:.2f}')
 
+                # The second coloum will show a bar graph with the Confidence scores of each digit
                 with col2:
                     y_pred_prob_numpy = y_pred_prob.squeeze().to('cpu').numpy()
 

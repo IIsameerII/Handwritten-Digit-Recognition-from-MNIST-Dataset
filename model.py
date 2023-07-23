@@ -6,13 +6,8 @@ def initialize_model(Pytorch_file_path):
 
     """Initializes the TinyVGG Model for Inference
 
-    Retrieves rows pertaining to the given keys from the Table instance
-    represented by table_handle.  String keys will be UTF-8 encoded.
-
     Args:
-        file_dir: An open smalltable.Table instance.
-        model_filename: A sequence of strings representing the key of each table
-          row to fetch.  String keys will be UTF-8 encoded.
+        Pytorch_file_path: A filepath to a pytorch model file (.pt or .pth)
 
     Returns:
         A pre-trained TinyVGG PyTorch model for inference
@@ -23,6 +18,8 @@ def initialize_model(Pytorch_file_path):
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
+    # This is a TinyVGG Architecture.
+    # Details of this architecture can be found at : https://poloclub.github.io/cnn-explainer/
     class TinyVGG(nn.Module):
         def __init__(self,
                     in_features,
@@ -66,10 +63,12 @@ def initialize_model(Pytorch_file_path):
             X = self.classifier(X)
             return (X)
 
+    # Intantiate the model
     model = TinyVGG(in_features=1,
                         out_features=10,
                         hidden_units=10).to(device)
     
+    # Load the Weights
     model.load_state_dict(torch.load(f=Pytorch_file_path,map_location=torch.device(device)))
     
     return model

@@ -3,17 +3,13 @@ import numpy as np
 from PIL import Image
 
 def extract_digits(image):
-    # TODO: put function defination
     """Takes numpy image data from user and takes the digit 
 
     Args:
-        image: A numpy .
+        image: A numpy array
         
     Returns:
-        A pre-trained TinyVGG PyTorch model for inference
-
-    Raises:
-        FileNotFound: An error occurred accessing the directory.
+        List of individual digits from the canvas
     """
 
     # This variable has all the digits stored in it once countors are formed
@@ -42,6 +38,15 @@ def extract_digits(image):
         
 
 def preprocess_image(image):
+    """Takes numpy image data from user and grayscales and applies threshold
+
+    Args:
+        image: A numpy array
+        
+    Returns:
+        thresh: A numpy array
+    """
+
     # Read the image and convert it to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -50,17 +55,31 @@ def preprocess_image(image):
 
     return thresh
 
-def image_padding(image,w,h,extend=10):
+def image_padding(image,w,h,margin=10):
+    """Takes numpy image data, width and height of the image and margin (whitespace in the edges) and applies margin to the image
+
+    Args:
+        image: A numpy array
+        w: width of image (int)
+        h: height of image (int)
+        margin: margin for the image at the end (int)
+        
+    Returns:
+        padded_image: A numpy array
+    """
     
+    # if width is greater than height
     if w>h:
         diff = w-h
         half_diff = int(round(diff/2))
-        padded_image = cv2.copyMakeBorder(image, half_diff+extend, half_diff+extend, extend, extend, cv2.BORDER_CONSTANT, value=[0, 0, 0])
+        padded_image = cv2.copyMakeBorder(image, half_diff+margin, half_diff+margin, margin, margin, cv2.BORDER_CONSTANT, value=[0, 0, 0])
         return padded_image
+    
+    # if height is greater than width
     elif h>w:
         diff = h-w
         half_diff = int(round(diff/2))
-        padded_image = cv2.copyMakeBorder(image, extend, extend, half_diff+extend, half_diff+extend, cv2.BORDER_CONSTANT, value=[0, 0, 0])
+        padded_image = cv2.copyMakeBorder(image, margin, margin, half_diff+margin, half_diff+margin, cv2.BORDER_CONSTANT, value=[0, 0, 0])
         return padded_image
     
 
