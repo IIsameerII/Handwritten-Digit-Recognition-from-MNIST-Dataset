@@ -14,7 +14,6 @@ st.title("Digit Detector using MNIST Dataset")
 
 # Run in GPU if available
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-st.info(f"Device is running on {device}")
 
 # Input the model path here
 model = model.initialize_model(r'model/MNIST_Digit_Detector.pt')
