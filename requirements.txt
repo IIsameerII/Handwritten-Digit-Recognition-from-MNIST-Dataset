@@ -6,3 +6,4 @@ pandas==1.5.3
 pillow==9.3.0
 opencv-python==4.7.0.68
 numpy==1.23.5
+libgl1
