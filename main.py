@@ -13,7 +13,7 @@ import image_preprocessor as ip
 st.title("Digit Detector using MNIST Dataset")
 
 # Input the model path here
-model = model.initialize_model('model\MNIST_Digit_Detector.pt')
+model = model.initialize_model(r'model/MNIST_Digit_Detector.pt')
 
 st.success("""
 Draw on the canvas, get the digits predicted with the confidence scores!
