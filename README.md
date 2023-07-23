@@ -1,6 +1,6 @@
 # Handwritten Digit Recognition from MNIST Dataset
 
-This Project has a model called TinyVGG trained MNIST dataset and uses Streamlit to run UI.
+This Project has a model called TinyVGG trained on MNIST dataset and uses Streamlit to run UI.
 
 **You can experience how the model runs and works by visiting the streamlit app :** [https://recognize-handwritten-digits.streamlit.app/](https://recognize-handwritten-digits.streamlit.app/)
 
@@ -24,14 +24,16 @@ When you have ran the script, you would get a streamlit command to run in your t
 
 NOTE : Ensure that the absolute address of main.py dosen't contain any spaces. If there are spaces, put "double quotes" around the address to make sure the streamlit run command works without any issues.
 
-`streamlit run "C:/<ABSOLUTE FILE ADDRESS>/Handwritten-Digit-Recognition-from-MNIST-Dataset/main.py"`
+```
+streamlit run "C:/`<ABSOLUTE FILE ADDRESS>`/Handwritten-Digit-Recognition-from-MNIST-Dataset/main.py"
+```
 
 You should see the following output -
 
 *You can now view your Streamlit app in your browser.*
 
-*Local URL: [http://localhost:8501](http://localhost:8501)
-Network URL: [http://192.168.1.91:8501](http://192.168.1.91:8501)*
+*Local URL: [http://localhost:8501
+*Network URL:* ](http://localhost:8501)*[http://192.168.1.91:8501](http://192.168.1.91:8501)**
 
 ## Dataset
 
