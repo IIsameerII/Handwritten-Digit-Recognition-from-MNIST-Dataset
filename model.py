@@ -63,7 +63,7 @@ def initialize_model(Pytorch_file_path):
             X = self.classifier(X)
             return (X)
 
-    # Intantiate the model
+    # Instantiate the model
     model = TinyVGG(in_features=1,
                         out_features=10,
                         hidden_units=10).to(device)

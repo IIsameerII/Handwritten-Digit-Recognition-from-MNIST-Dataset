@@ -38,7 +38,7 @@ def extract_digits(image):
         
 
 def preprocess_image(image):
-    """Takes numpy image data from user and grayscales and applies threshold
+    """Takes numpy image data from user and grayscale's and applies threshold
 
     Args:
         image: A numpy array

@@ -1,4 +1,4 @@
-# Import nessesary files
+# Import necessary files
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
 import torch
@@ -10,7 +10,7 @@ from PIL import Image
 import model
 import image_preprocessor as ip
 
-# Set the Streamlit page configration and Title
+# Set the Streamlit page configuration and Title
 st.set_page_config(page_title=r"Digit Detector",
                    page_icon=r'streamlit_icon.png')
 st.title("Digit Detector using MNIST Dataset")
@@ -56,7 +56,7 @@ if image_data is not None:
         
             pil_image = Image.fromarray(snip)       
             
-            # Transfrom the image to fit the model inputs
+            # Transform the image to fit the model inputs
             transform = transforms.Compose([
                 transforms.Resize(size=(28,28)),
                 transforms.ToTensor(),
@@ -72,27 +72,27 @@ if image_data is not None:
                 # Set the model to evaluation mode
                 model.eval()
                 
-                # Predit the digit of the model
+                # Predict the digit of the model
                 y_logits = model(transformed_image)
                 y_pred_prob = torch.softmax(y_logits,dim=1)
                 
                 conf = torch.max(y_pred_prob).item()*100
                 digit = str(torch.argmax(y_pred_prob).item())
 
-            # Invert the Colours for proper display
+            # Invert the colors for proper display
             invert = ip.invert_colors_opencv(pil_image)
 
             # A Streamlit Container Widget
             with st.container():
 
-                # 2 Coloums
+                # 2 column
                 col1,col2 = st.columns(2)
 
-                # The first coloum will show the image and the highest predicted value
+                # The first column will show the image and the highest predicted value
                 with col1:
                     st.image(invert,caption=f'Prediction: {digit}  |  Confidence: {conf:.2f}')
 
-                # The second coloum will show a bar graph with the Confidence scores of each digit
+                # The second column will show a bar graph with the Confidence scores of each digit
                 with col2:
                     y_pred_prob_numpy = y_pred_prob.squeeze().to('cpu').numpy()
 
