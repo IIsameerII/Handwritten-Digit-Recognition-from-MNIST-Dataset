@@ -12,6 +12,10 @@ import image_preprocessor as ip
 
 st.title("Digit Detector using MNIST Dataset")
 
+# Run in GPU if available
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+st.info(f"Device is running on {device}")
+
 # Input the model path here
 model = model.initialize_model(r'model/MNIST_Digit_Detector.pt')
 
@@ -37,8 +41,6 @@ image_data = st_canvas(stroke_width=b_width,
 # PS. Thats the only thing we need
 image_data = image_data.image_data
 
-# Run in GPU if available
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # Do something interesting with the image data
 if image_data is not None:
