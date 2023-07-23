@@ -70,7 +70,7 @@ def initialize_model(Pytorch_file_path):
                         out_features=10,
                         hidden_units=10).to(device)
     
-    model.load_state_dict(torch.load(f=Pytorch_file_path),map_location=torch.device(device))
+    model.load_state_dict(torch.load(f=Pytorch_file_path,map_location=torch.device(device)))
     
     return model
                                     
