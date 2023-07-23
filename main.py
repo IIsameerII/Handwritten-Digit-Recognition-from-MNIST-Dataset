@@ -5,9 +5,7 @@ import torch
 from torchvision import transforms
 
 import pandas as pd
-import numpy as np
 from PIL import Image
-import cv2
 
 import model
 import image_preprocessor as ip
@@ -31,7 +29,8 @@ st.header("Drawable Canvas")
 image_data = st_canvas(stroke_width=b_width,
                        stroke_color='#000000',
                        background_color='#FFFFFF',
-                       width=700
+                       width=700,
+                       height=80
                        )
 
 # Take the image data attribute and store it in the same variable.
