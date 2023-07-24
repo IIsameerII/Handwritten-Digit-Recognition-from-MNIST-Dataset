@@ -15,6 +15,22 @@ st.set_page_config(page_title=r"Digit Detector",
                    page_icon=r'streamlit_icon.png')
 st.title("Digit Detector using MNIST Dataset")
 
+# Change in Streamlit
+hide_footer = """
+<style>
+footer{
+    visibility:visible;
+}
+footer:before{
+    content: 'Coded by Sameer with ❤️';
+    display:block;
+    position:relative;
+    color:tomato;
+}
+</style>
+"""
+st.markdown(hide_footer,unsafe_allow_html=True)
+
 # Run in GPU if available
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
