@@ -12,7 +12,7 @@ import image_preprocessor as ip
 
 # Set the Streamlit page configuration and Title
 st.set_page_config(page_title=r"Digit Detector",
-                   page_icon=r'streamlit_icon.png')
+                   page_icon=r'streamlit_icon.png',)
 st.title("Digit Detector using MNIST Dataset")
 
 # Change in Streamlit
