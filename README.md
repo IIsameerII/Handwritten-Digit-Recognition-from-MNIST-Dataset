@@ -6,6 +6,10 @@ This Project has a model called TinyVGG trained on MNIST dataset and uses Stream
 
 ---
 
+## Demo
+
+https://github.com/IIsameerII/Handwritten-Digit-Recognition-from-MNIST-Dataset/assets/88422517/f7679dcb-9b41-42a7-be9d-35a32dc3c5d4
+
 ## Setup
 
 Firstly, clone the repository. Then, install required libraries to run the repository. You can use the CLI command -
