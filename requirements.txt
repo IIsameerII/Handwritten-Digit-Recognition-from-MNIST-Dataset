@@ -3,6 +3,6 @@ streamlit-drawable-canvas==0.9.3
 torch
 torchvision
 pandas==1.5.3
-pillow==10.0.0
+pillow==10.0.1
 opencv-python==4.7.0.68
 numpy==1.23.5
